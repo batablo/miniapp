@@ -1,0 +1,25 @@
+.contents.row.container
+  %h2.center Sign up
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    = devise_error_messages!
+    .input-field
+      = f.label :名前
+      %br/
+      = f.text_field :nickname, autofocus: true
+    .input-field
+      = f.label :email
+      %br/
+      = f.email_field :email
+    .input-field
+      = f.label :パスワード
+      - if @validatable
+        %em
+          (#{@minimum_password_length} characters minimum)
+      %br/
+      = f.password_field :password, autocomplete: "off"
+    .input-field
+      = f.label :もう一度同じパスワードを入力してください
+      %br/
+      = f.password_field :password_confirmation, autocomplete: "off"
+    .actions
+      = f.submit "登録完了",class:"col s4 waves-effect waves-light btn-large blue darken-3"

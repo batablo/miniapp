@@ -1,0 +1,18 @@
+.contents.row.container
+  %h2.center Log in
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    .input-field
+      = f.label :email
+      %br/
+      = f.email_field :email, autofocus: true
+    .input-field
+      = f.label :パスワード
+      %br/
+      = f.password_field :password, autocomplete: "off"
+    - if devise_mapping.rememberable?
+      .input-field
+        = f.label :ログイン情報を保存する
+        %br/
+        = f.check_box :remember_me,type:"checkbox",class:"filled-in"
+    .actions
+      = f.submit "ログイン",class:"col s4 waves-effect waves-light btn-large blue darken-3"

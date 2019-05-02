@@ -1,0 +1,36 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Miniapp
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    %style{:href => "./application.scss", :type => "text/scss"}
+    / Compiled and minified CSS
+    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css", :rel => "stylesheet"}/
+    %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
+    / Compiled and minified JavaScript
+    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"}
+    %script{:crossorigin => "anonymous", :integrity => "sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo=", :src => "https://code.jquery.com/jquery-3.4.0.js"}
+  %body
+    %nav.teal.accent-4
+      .nav-wrapper
+        %a.brand-logo.center{:href => "#"} Blog
+        - if user_signed_in?
+          %ul#nav-mobile.right.hide-on-med-and-down
+            %li 
+              %a{:href => "/users/#{current_user.id}"} #{current_user.nickname}
+            %li
+              = link_to "ログアウト", destroy_user_session_path , method: :delete
+            %li
+              %a.post{:href => "/blogs/new"} 投稿する
+        - else
+          %ul#nav-mobile.right.hide-on-med-and-down
+            %li
+              = link_to "ログイン", new_user_session_path, class: 'post'
+            %li
+              = link_to "新規登録", new_user_registration_path, class: 'post'
+    %script{:src => "./app.js", :type => "text/javascript"}
+
+    = yield

@@ -1,0 +1,16 @@
+.card.orange.lighten-4
+  .card-content.red-text.text-accent-2
+    %p
+      = blog.user.nickname
+  .card-content.black-text.flow-text
+    %p
+      = blog.text
+  .card-action
+    -# = link_to '一覧を見る', "/blogs/#{blog.id}"
+    - if user_signed_in? && current_user.id == blog.user_id
+      %a{href:"/blogs/#{blog.id}/edit",class:"waves-effect waves-light btn blue"}
+        %i.material-icons.left border_color
+        編集
+      = link_to "/blogs/#{blog.id}",class:"waves-effect waves-light btn blue-grey darken-3",method: :delete,data: { confirm: '本当に削除してよろしいですか？' }  do
+        %i.material-icons.left delete
+        削除

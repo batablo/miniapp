@@ -1,0 +1,7 @@
+.row
+  %p
+    = @blog.user.nickname
+  .col.s12.m6
+    - @blogs.each do |blog|
+      = render partial: "blog", locals: { blog: blog }
+= paginate(@blogs)
